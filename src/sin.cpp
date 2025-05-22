@@ -14,6 +14,7 @@
 #include <vtkWindowToImageFilter.h>
 #include <vtkPNGWriter.h>
 
+#include <wx/wx.h>
 #include <math.h>
 #include <iostream>
 #include <thread>
@@ -125,11 +126,7 @@ int main(int, char*[])
         windowToImageFilter->Modified();
         windowToImageFilter->Update();
     
-        vtkNew<vtkPNGWriter> writer;
-        std::string filename = "frame_" + std::to_string(frame) + ".png";
-        writer->SetFileName(filename.c_str());
-        writer->SetInputConnection(windowToImageFilter->GetOutputPort());
-        writer->Write();
+        
     
         frame++;
     }
