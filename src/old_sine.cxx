@@ -1,3 +1,5 @@
+#include "../include/geometry_2d.hxx"
+
 #include <vtkActor.h>
 #include <vtkCamera.h>
 #include <vtkCellArray.h>
@@ -13,11 +15,13 @@
 #include <vtkRenderer.h>
 #include <vtkWindowToImageFilter.h>
 #include <vtkPNGWriter.h>
+#include <vtkGenericOpenGLRenderWindow.h>
 
-#include <wx/wx.h>
+
 #include <math.h>
 #include <iostream>
-#include <thread>
+
+
 
 struct point3d {
     double x;
@@ -27,7 +31,7 @@ struct point3d {
 
 
 
-int main(int, char*[])
+int generate_sin_render(vtkSmartPointer<vtkGenericOpenGLRenderWindow> renderWindow)
 {
     vtkNew<vtkNamedColors> colors;
     vtkNew<vtkPoints> points;
@@ -78,7 +82,7 @@ int main(int, char*[])
 
     // Setup render window, renderer, and interactor.
     vtkNew<vtkRenderer> renderer;
-    vtkNew<vtkRenderWindow> renderWindow;
+    
     renderWindow->SetWindowName("PolyLine");
     renderWindow->AddRenderer(renderer);
     renderWindow->SetSize(1000, 500);
@@ -134,3 +138,4 @@ int main(int, char*[])
 
     return EXIT_SUCCESS;
 }
+
