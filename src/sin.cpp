@@ -96,7 +96,7 @@ int main(int, char*[])
 
     vtkCamera* cam = renderer->GetActiveCamera();
     
-    cam->SetPosition(0, -500, 1000);
+    cam->SetPosition(0, -500, 1000);           // 2e coord : distance avec l'objet
     cam->SetFocalPoint(0, 0, 0);
     cam->SetViewUp(0, 1, 0);
     

@@ -28,7 +28,7 @@ endif()
 # Find wxWidgets
 # ------------------------------------------------------------------------------
 
-find_package(wxWidgets REQUIRED COMPONENTS net core base)
+find_package(wxWidgets REQUIRED COMPONENTS net core base gl)
 
 if(wxWidgets_USE_FILE)
   include(${wxWidgets_USE_FILE})
@@ -40,7 +40,7 @@ endif()
 # ------------------------------------------------------------------------------
 
 add_executable(PolyLine
-  sin.cpp
+  testui.cxx
 )
 
 target_include_directories(PolyLine PRIVATE
