@@ -61,6 +61,9 @@ void Animator::start() {
 }
 
 
+
+
+
 void Animator::updateFrame(){
     strategy->updatePoints(points, frame);
 
@@ -71,6 +74,11 @@ void Animator::updateFrame(){
     renderWindow->Render();
 
     frame = (frame + 1) % 360;
+}
+
+
+AnimationStrategy* Animator::getStrategy() const {
+    return strategy.get();
 }
 
 

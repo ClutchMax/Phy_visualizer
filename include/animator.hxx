@@ -23,6 +23,8 @@ public:
         QObject* parent = nullptr);
 
     void start();
+    AnimationStrategy* getStrategy() const;
+
 
 protected slots:
     void updateFrame();
