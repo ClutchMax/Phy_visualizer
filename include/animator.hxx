@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QTimer>
+#include "animation_strategy.hxx"
+#include <memory>
 
 #include <vtkSmartPointer.h>
 #include <vtkPoints.h>
@@ -12,24 +14,33 @@
 #include <vtkRenderer.h>
 #include <vtkGenericOpenGLRenderWindow.h>
 
-class SineAnimator : public QObject {
+class Animator : public QObject {
     Q_OBJECT
 
 public:
-    SineAnimator(vtkGenericOpenGLRenderWindow* renderWindow, QObject* parent = nullptr);
+    Animator(vtkGenericOpenGLRenderWindow* renderWindow, 
+        std::unique_ptr<AnimationStrategy> strategy,
+        QObject* parent = nullptr);
+
     void start();
 
-private slots:
+protected slots:
     void updateFrame();
+    
 
-private:
+protected:
     QTimer timer;
-    int frame;
+    int frame = 0;
 
+    vtkGenericOpenGLRenderWindow* renderWindow;
     vtkSmartPointer<vtkPoints> points;
     vtkSmartPointer<vtkPolyData> polyData;
-    vtkSmartPointer<vtkRenderer> renderer;
     vtkSmartPointer<vtkPolyDataMapper> mapper;
     vtkSmartPointer<vtkActor> actor;
-    vtkGenericOpenGLRenderWindow* renderWindow;
+    vtkSmartPointer<vtkRenderer> renderer;
+
+    std::unique_ptr<AnimationStrategy> strategy;
+    
 };
+
+

@@ -1,5 +1,4 @@
-// sine_animator.cxx
-#include "../include/geometry_2d.hxx"
+#include "../include/animator.hxx"
 #include <vtkNamedColors.h>
 #include <vtkPolyLine.h>
 #include <vtkCellArray.h>
@@ -7,8 +6,13 @@
 #include <vtkCamera.h>
 #include <cmath>
 
-SineAnimator::SineAnimator(vtkGenericOpenGLRenderWindow* rwin, QObject* parent)
-    : QObject(parent), renderWindow(rwin), frame(0)
+
+Animator::Animator(vtkGenericOpenGLRenderWindow* rwin, 
+                    std::unique_ptr<AnimationStrategy> strat,
+                    QObject* parent)
+    : QObject(parent), 
+      renderWindow(rwin), 
+      strategy(std::move(strat))
 {
     vtkNew<vtkNamedColors> colors;
 
@@ -48,20 +52,17 @@ SineAnimator::SineAnimator(vtkGenericOpenGLRenderWindow* rwin, QObject* parent)
     renderer->GetActiveCamera()->SetFocalPoint(0, 0, 0);
     renderer->GetActiveCamera()->SetViewUp(0, 1, 0);
 
-    connect(&timer, &QTimer::timeout, this, &SineAnimator::updateFrame);
+    connect(&timer, &QTimer::timeout, this, &Animator::updateFrame);
 }
 
-void SineAnimator::start() {
+
+void Animator::start() {
     timer.start(30);  // ~33 fps
 }
 
-void SineAnimator::updateFrame() {
-    for (int i = 0; i < 400; i++) {
-        double x = 100 * (2 * M_PI) * static_cast<double>(i) / 400 - 100 * M_PI;
-        double y = 100 * sin((i + frame) * 8 * M_PI / 360.0);
-        double z = 100 * cos((i + frame) * 8 * M_PI / 360.0);
-        points->SetPoint(i, x, y, z);
-    }
+
+void Animator::updateFrame(){
+    strategy->updatePoints(points, frame);
 
     points->Modified();
     polyData->Modified();
@@ -71,3 +72,6 @@ void SineAnimator::updateFrame() {
 
     frame = (frame + 1) % 360;
 }
+
+
+

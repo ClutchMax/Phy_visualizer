@@ -27,8 +27,11 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Add your sources
 add_executable(MyVTKQtApp
   src/main.cxx
-  src/geometry_2d.cxx
-  include/geometry_2d.hxx
+  src/animator.cxx
+  src/strategy_sine_wave.cxx
+  include/animator.hxx
+  include/animation_strategy.hxx
+  include/strategy_sine_wave.hxx
 )
 
 # Include VTK use file (sets include dirs and other variables)
