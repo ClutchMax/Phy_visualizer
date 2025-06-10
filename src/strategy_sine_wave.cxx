@@ -5,7 +5,7 @@ SineWaveStrategy::SineWaveStrategy()
     : SineWaveStrategy(8.0, 100.0) {}
 
 SineWaveStrategy::SineWaveStrategy(double freq, double amp)
-    : frequency(freq), amplitude(amp) {}
+    : frequency(freq), amplitude(amp), type("sine") {}
 
 SineWaveStrategy::~SineWaveStrategy() = default;
 
@@ -16,6 +16,12 @@ void SineWaveStrategy::updatePoints(vtkPoints* points, int frame) {
         double z = amplitude * cos((i + frame) * frequency * M_PI / 360.0);
         points->SetPoint(i, x, y, z);
     }
+}
+
+
+
+std::string SineWaveStrategy::getType(){
+    return type;
 }
 
 void SineWaveStrategy::setAmplitude(double ampl){

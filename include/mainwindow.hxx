@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <memory>
+#include "strategy_sine_wave.hxx"
+#include "animator.hxx"
+
 
 
 namespace Ui {
@@ -19,6 +22,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    std::unique_ptr<Animator> animator;
 
 private slots:
     // Welcome page buttons

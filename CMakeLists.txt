@@ -30,10 +30,12 @@ add_executable(MyVTKQtApp
   src/animator.cxx
   src/strategy_sine_wave.cxx
   src/mainwindow.cxx
+  src/strategy_factory.cxx
   include/animator.hxx
   include/animation_strategy.hxx
   include/strategy_sine_wave.hxx
   include/mainwindow.hxx
+  include/strategy_factory.hxx
 )
 
 # Include VTK use file (sets include dirs and other variables)

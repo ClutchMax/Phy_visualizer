@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vtkPoints.h>
+#include <string>
 
 
 class AnimationStrategy {
@@ -9,6 +10,8 @@ public:
     virtual void updatePoints(vtkPoints* points, int frame) = 0;
     //virtual int getStrategyId();
 
-private:
-    int id_strat;
+    virtual std::string getType() = 0;
+
+protected:
+    std::string type;
 };

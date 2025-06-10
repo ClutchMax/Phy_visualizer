@@ -1,5 +1,6 @@
 #include "../gui/ui_mainwindow.h"
 #include "../include/mainwindow.hxx"
+#include "../include/strategy_factory.hxx"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -21,6 +22,24 @@ void MainWindow::on_accueil_background_button_clicked()
 void MainWindow::on_accueil_math_button_clicked()
 {
     ui->stackedWidget_main->setCurrentWidget(ui->math_page);
+    QVTKOpenGLNativeWidget* vtkWidget = ui->vtkWidget_math;
+    auto renderWindow = vtkSmartPointer<vtkGenericOpenGLRenderWindow>::New();
+    vtkWidget->setRenderWindow(renderWindow);
+
+
+    double amplSliderVal = ui->amplSlider->value();
+
+    auto strategy = StrategyFactory::create("sine", 8, amplSliderVal);      //std::make_unique<SineWaveStrategy>(8, amplSliderVal);
+    animator = std::make_unique<Animator>(renderWindow, std::move(strategy));
+    animator->start();
+
+
+
+    QObject::connect(ui->amplSlider, &QSlider::valueChanged, this, [this](int value) {
+    if (auto sine = dynamic_cast<SineWaveStrategy*>(animator->getStrategy())) {
+        sine->setAmplitude(static_cast<double>(value));
+    }
+});
 }
 
 
@@ -36,6 +55,7 @@ void MainWindow::on_menu_button_background_clicked()
 void MainWindow::on_menu_button_math_clicked()
 {
     ui->stackedWidget_main->setCurrentWidget(ui->accueil);
+    
 }
 
 
