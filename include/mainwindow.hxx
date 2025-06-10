@@ -23,6 +23,8 @@ public:
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<Animator> animator;
+    bool isMathInitialized;
+    bool isBackgroundInizialized;
 
 private slots:
     // Welcome page buttons
