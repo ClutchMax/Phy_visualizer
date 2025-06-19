@@ -5,6 +5,9 @@ project(MyVTKQtApp)
 find_package(VTK REQUIRED COMPONENTS
     CommonCore
     RenderingCore
+    ImagingCore
+    IOImage
+    IOCore
     InteractionStyle
     RenderingOpenGL2
     RenderingFreeType
@@ -31,11 +34,13 @@ add_executable(MyVTKQtApp
   src/strategy_sine_wave.cxx
   src/mainwindow.cxx
   src/strategy_factory.cxx
+  src/strategy_random_waves.cxx
   include/animator.hxx
   include/animation_strategy.hxx
   include/strategy_sine_wave.hxx
   include/mainwindow.hxx
   include/strategy_factory.hxx
+  include/strategy_random_waves.hxx
 )
 
 # Include VTK use file (sets include dirs and other variables)

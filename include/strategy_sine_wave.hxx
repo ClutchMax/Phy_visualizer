@@ -6,11 +6,12 @@
 #include <vtkPolyDataMapper.h>
 #include <vtkActor.h>
 #include <vtkRenderer.h>
+#include <vtkSmartPointer.h>
 
 class SineWaveStrategy : public AnimationStrategy {
 public:
     SineWaveStrategy();
-    SineWaveStrategy(double freq, double amp);
+    SineWaveStrategy(int height, int width, double freq, double amp);
     ~SineWaveStrategy() override;
     void updateAnim(int frame) override;
 
@@ -29,6 +30,8 @@ private:
     std::string type;
     double frequency;
     double amplitude;
+    int height;
+    int width;
 
     vtkSmartPointer<vtkPoints> points;
     vtkSmartPointer<vtkPolyData> polyData;

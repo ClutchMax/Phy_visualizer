@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="accueil">
      <widget class="QLabel" name="label_accueil">
@@ -100,8 +100,8 @@
            <rect>
             <x>10</x>
             <y>10</y>
-            <width>160</width>
-            <height>188</height>
+            <width>233</width>
+            <height>262</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
@@ -158,6 +158,51 @@
            </item>
            <item>
             <widget class="QSpinBox" name="spinBox"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_frame">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Frame :</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_frameNumber">
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <property name="topMargin">
+              <number>15</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="button_play">
+               <property name="text">
+                <string>Play</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="button_pause">
+               <property name="text">
+                <string>Pause</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
