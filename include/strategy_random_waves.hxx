@@ -11,7 +11,7 @@
 class RandomWavesStrategy : public AnimationStrategy {
 public:
     RandomWavesStrategy();
-    RandomWavesStrategy(int height, int width, double freq, double amp, double randFactor, double seed, int duration);
+    RandomWavesStrategy(int height, int width, double freq, double amp, double randFactor, double seed, int duration, int line_width);
     ~RandomWavesStrategy() override;
     void updateAnim(int frame) override;
 
@@ -41,6 +41,7 @@ private:
     double seed;
     int** current_wave_pattern = nullptr;
     int duration;
+    int line_width;
 
     vtkSmartPointer<vtkImageData> image;
     vtkSmartPointer<vtkImageActor> imgActor;

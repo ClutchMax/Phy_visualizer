@@ -35,12 +35,14 @@ add_executable(MyVTKQtApp
   src/mainwindow.cxx
   src/strategy_factory.cxx
   src/strategy_random_waves.cxx
+  src/strategy_gameOfLife.cxx
   include/animator.hxx
   include/animation_strategy.hxx
   include/strategy_sine_wave.hxx
   include/mainwindow.hxx
   include/strategy_factory.hxx
   include/strategy_random_waves.hxx
+  include/strategy_gameOfLife.hxx
 )
 
 # Include VTK use file (sets include dirs and other variables)

@@ -53,7 +53,7 @@ void Animator::updateFrame(){
 
     if(frame >= duration){
         saveAnim = false;
-        timer.stop();
+        
     }
 
     frame = (frame + 1) % (duration+1);

@@ -7,10 +7,10 @@
 #include <cmath>
 
 SineWaveStrategy::SineWaveStrategy() 
-    : SineWaveStrategy(8.0, 100.0) {}
+    : SineWaveStrategy(500, 800, 8.0, 100.0) {}
 
-SineWaveStrategy::SineWaveStrategy(double freq, double amp)
-    : frequency(freq), amplitude(amp), type("sine") {
+SineWaveStrategy::SineWaveStrategy(int height, int width, double freq, double amp)
+    : height(height), width(width), frequency(freq), amplitude(amp), type("sine") {
         vtkNew<vtkNamedColors> colors;
 
     points = vtkSmartPointer<vtkPoints>::New();

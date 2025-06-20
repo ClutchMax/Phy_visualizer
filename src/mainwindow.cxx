@@ -34,7 +34,8 @@ void MainWindow::on_accueil_math_button_clicked()
         double amplSliderVal = ui->amplSlider->value();
 
         //auto strategy = StrategyFactory::create("sine", 800, 500, 8, amplSliderVal); 
-        auto strategy = StrategyFactory::create("random_wave", 800, 800, 10, amplSliderVal, 0, 40, 200);      //std::make_unique<SineWaveStrategy>(8, amplSliderVal);
+        //auto strategy = StrategyFactory::create("random_wave", 800, 800, 100, amplSliderVal, 0, 40, 200, 5);      //std::make_unique<SineWaveStrategy>(8, amplSliderVal);
+        auto strategy = StrategyFactory::create("game_of_life", 900, 900, 96);
         animator = std::make_unique<Animator>(renderWindow, std::move(strategy), 360, false);
         animator->start();
 

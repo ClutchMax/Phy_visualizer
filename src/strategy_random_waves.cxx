@@ -8,10 +8,10 @@
 #include <vtkImageReslice.h>
 
 RandomWavesStrategy::RandomWavesStrategy()
-    : RandomWavesStrategy(500, 800, .0, .0, .0, .0, 24) {}
+    : RandomWavesStrategy(500, 800, .0, .0, .0, .0, 24, 3) {}
 
-RandomWavesStrategy::RandomWavesStrategy(int height, int width, double freq, double amp, double randFactor, double seed, int duration)
-    : height(height), width(width), frequency(freq), amplitude(amp), type("random_wave"), random_factor(randFactor), seed(seed), duration(duration){
+RandomWavesStrategy::RandomWavesStrategy(int height, int width, double freq, double amp, double randFactor, double seed, int duration, int line_width)
+    : height(height), width(width), frequency(freq), amplitude(amp), type("random_wave"), random_factor(randFactor), seed(seed), duration(duration), line_width(line_width) {
 
         image = vtkSmartPointer<vtkImageData>::New();
         image->SetDimensions(width, height, 1);       
@@ -25,9 +25,9 @@ RandomWavesStrategy::RandomWavesStrategy(int height, int width, double freq, dou
                 // pixel[0] = i*255/height;
                 // pixel[1] = i*255/height;
                 // pixel[2] = i*255/height;
-                pixel[0] = 150;
-                pixel[1] = 150;
-                pixel[2] = 150;
+                pixel[0] = 121;
+                pixel[1] = 214;
+                pixel[2] = 247;
 
             }
         }
@@ -93,9 +93,9 @@ void RandomWavesStrategy::addLastLine(int frame){
         unsigned char* pixel = static_cast<unsigned char*>(image->GetScalarPointer(x, 0, 0));
         if(row_to_add[x] != 1){
             // Keep background color
-            pixel[0] = 100;
-            pixel[1] = 100;
-            pixel[2] = 100;
+            pixel[0] = 121;
+            pixel[1] = 214;
+            pixel[2] = 247;
         } else {
             // Print white sine
             pixel[0] = 255;
@@ -115,7 +115,7 @@ void RandomWavesStrategy::generateWavePattern(){
     const int height = image->GetDimensions()[1];
     const double phaseSpeed = 0.0;
 
-    int ampl_int = (int) floor(amplitude*2); 
+    int ampl_int = (int) floor(amplitude); 
     int** sin_matrix = current_wave_pattern;
 
     
@@ -138,24 +138,22 @@ void RandomWavesStrategy::generateWavePattern(){
 
     // Calculate new values
     for(int x = 0 ; x < width ; x++){
-        //double tmp = 4*sin(x/10) - 2*sin(x/3) + 3*sin(x + M_PI/4.0);
-        double tmp = sin(x/10);
+        double tmp = 8*sin(x/10) - 4*sin(x/6) + 9*sin(x/8 + M_PI/4.0);
+        //double tmp = sin(x/10);
         int y = (int)round(tmp);
-        if(y >= 0 && y <= (ampl_int*2 +1)){
+        if(y > (-ampl_int) && y <= (ampl_int)){
             sin_matrix[y+ampl_int][x] = 1;
+
+            // Adds width to the line (if line_width > 1)
+            for(int i = 0 ; i < line_width ; i++){
+                if(y - i > (-ampl_int)){sin_matrix[y+ampl_int-i][x] = 1;}
+                if(y + i > (-ampl_int)){sin_matrix[y+ampl_int+i][x] = 1;}
+            }
         }        
     }
 
     current_wave_pattern = sin_matrix;
-    std::cout << "[";
-    for(int x = 0 ; x < (ampl_int*2 +1) ; x++){
-        for(int y = 0 ; y < width ; y++){
-            if(sin_matrix[x][y]>0)
-            std::cout << sin_matrix[x][y]; 
-        }
-        std::cout << std::endl;
-    } 
-    std::cout << "]" << std::endl;
+    
 
 }
 
@@ -184,4 +182,15 @@ void RandomWavesStrategy::setAmplitude(double ampl){
 
 void initialize_image_grey_scalar (){
     
+}
+
+void print_matrix(int** mat, int n, int m){
+    std::cout << "[";
+    for(int x = 0 ; x < n ; x++){
+        for(int y = 0 ; y < m ; y++){
+            std::cout << mat[x][y]; 
+        }
+        std::cout << std::endl;
+    } 
+    std::cout << "]" << std::endl;
 }
