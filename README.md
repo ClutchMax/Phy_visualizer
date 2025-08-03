@@ -4,6 +4,16 @@ Small C++ software made to visualize scientific results. Its purpose is to visua
 
 It currently displays my implementation of the "Game of life", as display of how I print a matrix. This project will grow with many functionalities.
 
-# Dependencies
+## Dependencies
 
 The UI is made with Qt, and the graphics windows is a VTK render.
+
+## Build
+
+```
+mdkir build
+cd build
+cmake ..
+make
+```
+
